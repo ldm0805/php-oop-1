@@ -7,14 +7,18 @@ class Movie
     public $immagine;
     public $more_data_film;
     public $anno_uscita;
+    public $actor;
 
 
-    function __construct($_nome, $_regista, $_immagine, $_anno_uscita, DataMore $_more_data_film)
+
+    function __construct($_nome, $_regista, $_immagine, $_anno_uscita, DataMore $_more_data_film, MoreActor $_actor)
     {
         $this->nome_film = $_nome;
         $this->regista = $_regista;
         $this->immagine = $_immagine;
         $this->anno_uscita = $_anno_uscita;
+        $this->actor = $_actor;
+
 
         //Aggiungo con la classe DataMore
         $this->more_data_film = $_more_data_film;
@@ -41,17 +45,22 @@ class DataMore
     }
 }
 
+class MoreActor
+{
+    public $actor;
+    function __construct($_actor)
+    {
+        $this->actor = $_actor;
+    }
+}
+
 // $movie_1->nome_film = 'Harry Potter e la pietra filosofale';
 // $movie_1->regista = 'Chris Columbus';
 // $movie_1->lingua_originale = 'Inglese';
 // var_dump($movie_1);
 
-$movie_1 = new Movie('Harry Potter e la pietra filosofale', 'Chris Columbus', 'https://m.media-amazon.com/images/I/51D0MC5dZhL._SY445_.jpg', '2001', new DataMore('Inglese', 'Daniel Radcliffe'));
-$movie_2 = new Movie('Il Signore degli Anelli', 'Peter Jackson', 'https://pad.mymovies.it/filmclub/2002/01/011/coverlg_home.jpg', '2001', new DataMore('Inglese', 'Elijah Wood'));
-// echo '<pre>';
-// var_dump($movie_1);
-// echo '</pre>';
-
+$movie_1 = new Movie('Harry Potter e la pietra filosofale', 'Chris Columbus', 'https://m.media-amazon.com/images/I/51D0MC5dZhL._SY445_.jpg', '2001', new DataMore('Inglese', 'Daniel Radcliffe'), new MoreActor(array("Ron Weasley", "Hermione Granger")));
+$movie_2 = new Movie('Il Signore degli Anelli', 'Peter Jackson', 'https://pad.mymovies.it/filmclub/2002/01/011/coverlg_home.jpg', '2002', new DataMore('Inglese', 'Elijah Wood'), new MoreActor(array("Viggo Mortensen", "Sean Astin")));
 
 ?>
 
@@ -82,7 +91,12 @@ $movie_2 = new Movie('Il Signore degli Anelli', 'Peter Jackson', 'https://pad.my
                         <p class="card-text"><?php echo $movie_1->more_data_film->lingua; ?></p>
                         <p class="card-text"><?php echo $movie_1->more_data_film->attore_principale; ?></p>
                         <p class="card-text"><?php echo DataMore::$genere; ?></p>
-                        <p>L'età del film è : <?php echo $movie_1->getAge(); ?></p>
+                        <p class="card-text">
+                            <?php foreach ($movie_1->actor->actor as $actor) {
+                                echo "<p class='card-text'>$actor</p>";
+                            } ?>
+                        </p>
+                        <p>L'età del film è : <?php echo $movie_1->getAge(); ?> anni</p>
                     </div>
                 </div>
                 <div class="card">
@@ -94,6 +108,12 @@ $movie_2 = new Movie('Il Signore degli Anelli', 'Peter Jackson', 'https://pad.my
                         <p class="card-text"><?php echo $movie_2->more_data_film->lingua; ?></p>
                         <p class="card-text"><?php echo $movie_2->more_data_film->attore_principale; ?></p>
                         <p class="card-text"><?php echo DataMore::$genere; ?></p>
+                        <p class="card-text">
+                            <?php foreach ($movie_2->actor->actor as $actor) {
+                                echo "<p class='card-text'>$actor</p>";
+                            } ?>
+                        </p>
+
                         <p>L'età del film è : <?php echo $movie_2->getAge(); ?> anni</p>
                     </div>
                 </div>
