@@ -4,12 +4,15 @@ class Movie
 {
     public $nome_film;
     public $regista;
+    public $immagine;
     public $more_data_film;
 
-    function __construct($_nome, $_regista, DataMore $_more_data_film)
+    function __construct($_nome, $_regista, $_immagine, DataMore $_more_data_film)
     {
         $this->nome_film = $_nome;
         $this->regista = $_regista;
+        $this->immagine = $_immagine;
+
         //Aggiungo con la classe DataMore
         $this->more_data_film = $_more_data_film;
     }
@@ -25,11 +28,6 @@ class DataMore
         $this->lingua = $_lingua;
         $this->attore_principale = $_attore_principale;
     }
-    public function getgenere()
-    {
-        // Recuperare la propietà della classe per utilizzarla all'esterno 
-        return self::$genere;
-    }
 }
 
 // $movie_1->nome_film = 'Harry Potter e la pietra filosofale';
@@ -37,8 +35,8 @@ class DataMore
 // $movie_1->lingua_originale = 'Inglese';
 // var_dump($movie_1);
 
-$movie_1 = new Movie('Harry Potter e la pietra filosofale', 'Chris Columbus', new DataMore('Inglese', 'Daniel Radcliffe'));
-$movie_2 = new Movie('Il Signore degli Anelli', 'Peter Jackson', new DataMore('Inglese', 'Elijah Wood'));
+$movie_1 = new Movie('Harry Potter e la pietra filosofale', 'Chris Columbus', 'https://m.media-amazon.com/images/I/51D0MC5dZhL._SY445_.jpg', new DataMore('Inglese', 'Daniel Radcliffe'));
+$movie_2 = new Movie('Il Signore degli Anelli', 'Peter Jackson', 'https://pad.mymovies.it/filmclub/2002/01/011/coverlg_home.jpg', new DataMore('Inglese', 'Elijah Wood'));
 // echo '<pre>';
 // var_dump($movie_1);
 // echo '</pre>';
@@ -64,26 +62,28 @@ $movie_2 = new Movie('Il Signore degli Anelli', 'Peter Jackson', new DataMore('I
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-12">
-                <h1>
-                    <?php
-                    echo $movie_1->nome_film;
-                    echo $movie_1->regista;
-                    echo $movie_1->more_data_film->lingua;
-                    echo $movie_1->more_data_film->attore_principale;
-                    echo DataMore::$genere;
-                    ?>
-                </h1>
+            <div class="col-12 d-flex">
+                <div class="card">
+                    <img class="card-img-top" src="<?php echo $movie_1->immagine; ?>" alt="Card image cap">
+                    <div class="card-body">
+                        <h3><?php echo $movie_1->nome_film; ?></h3>
+                        <p class="card-text"><?php echo $movie_1->regista; ?></p>
+                        <p class="card-text"><?php echo $movie_1->more_data_film->lingua; ?></p>
+                        <p class="card-text"><?php echo $movie_1->more_data_film->attore_principale; ?></p>
+                        <p class="card-text"><?php echo DataMore::$genere; ?></p>
+                    </div>
+                </div>
+                <div class="card">
 
-                <h1>
-                    <?php
-                    echo $movie_2->nome_film;
-                    echo $movie_2->regista;
-                    echo $movie_2->more_data_film->lingua;
-                    echo $movie_2->more_data_film->attore_principale;
-                    echo DataMore::$genere;
-                    ?>
-                </h1>
+                    <img class="card-img-top" src="<?php echo $movie_2->immagine; ?>" alt="Card image cap">
+                    <div class="card-body">
+                        <h3><?php echo $movie_2->nome_film; ?></h3>
+                        <p class="card-text"><?php echo $movie_2->regista; ?></p>
+                        <p class="card-text"><?php echo $movie_2->more_data_film->lingua; ?></p>
+                        <p class="card-text"><?php echo $movie_2->more_data_film->attore_principale; ?></p>
+                        <p class="card-text"><?php echo DataMore::$genere; ?></p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
