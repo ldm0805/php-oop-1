@@ -6,17 +6,28 @@ class Movie
     public $regista;
     public $immagine;
     public $more_data_film;
+    public $anno_uscita;
 
-    function __construct($_nome, $_regista, $_immagine, DataMore $_more_data_film)
+
+    function __construct($_nome, $_regista, $_immagine, $_anno_uscita, DataMore $_more_data_film)
     {
         $this->nome_film = $_nome;
         $this->regista = $_regista;
         $this->immagine = $_immagine;
+        $this->anno_uscita = $_anno_uscita;
 
         //Aggiungo con la classe DataMore
         $this->more_data_film = $_more_data_film;
     }
+
+    public function getAge($releaseYear)
+    {
+        $currentYear = date("Y");
+        $age = $currentYear - $releaseYear;
+        return $age;
+    }
 }
+
 class DataMore
 {
     public $lingua;
@@ -35,8 +46,8 @@ class DataMore
 // $movie_1->lingua_originale = 'Inglese';
 // var_dump($movie_1);
 
-$movie_1 = new Movie('Harry Potter e la pietra filosofale', 'Chris Columbus', 'https://m.media-amazon.com/images/I/51D0MC5dZhL._SY445_.jpg', new DataMore('Inglese', 'Daniel Radcliffe'));
-$movie_2 = new Movie('Il Signore degli Anelli', 'Peter Jackson', 'https://pad.mymovies.it/filmclub/2002/01/011/coverlg_home.jpg', new DataMore('Inglese', 'Elijah Wood'));
+$movie_1 = new Movie('Harry Potter e la pietra filosofale', 'Chris Columbus', 'https://m.media-amazon.com/images/I/51D0MC5dZhL._SY445_.jpg', '2001', new DataMore('Inglese', 'Daniel Radcliffe'));
+$movie_2 = new Movie('Il Signore degli Anelli', 'Peter Jackson', 'https://pad.mymovies.it/filmclub/2002/01/011/coverlg_home.jpg', '2001', new DataMore('Inglese', 'Elijah Wood'));
 // echo '<pre>';
 // var_dump($movie_1);
 // echo '</pre>';
@@ -82,6 +93,7 @@ $movie_2 = new Movie('Il Signore degli Anelli', 'Peter Jackson', 'https://pad.my
                         <p class="card-text"><?php echo $movie_2->more_data_film->lingua; ?></p>
                         <p class="card-text"><?php echo $movie_2->more_data_film->attore_principale; ?></p>
                         <p class="card-text"><?php echo DataMore::$genere; ?></p>
+                        <p>L'età del film è: <?php echo $movie_2->getAge($anno_uscita); ?></p>
                     </div>
                 </div>
             </div>
