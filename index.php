@@ -20,10 +20,10 @@ class Movie
         $this->more_data_film = $_more_data_film;
     }
 
-    public function getAge($releaseYear)
+    public function getAge()
     {
         $currentYear = date("Y");
-        $age = $currentYear - $releaseYear;
+        $age = $currentYear - $this->anno_uscita;
         return $age;
     }
 }
@@ -82,6 +82,7 @@ $movie_2 = new Movie('Il Signore degli Anelli', 'Peter Jackson', 'https://pad.my
                         <p class="card-text"><?php echo $movie_1->more_data_film->lingua; ?></p>
                         <p class="card-text"><?php echo $movie_1->more_data_film->attore_principale; ?></p>
                         <p class="card-text"><?php echo DataMore::$genere; ?></p>
+                        <p>L'età del film è : <?php echo $movie_1->getAge(); ?></p>
                     </div>
                 </div>
                 <div class="card">
@@ -93,7 +94,7 @@ $movie_2 = new Movie('Il Signore degli Anelli', 'Peter Jackson', 'https://pad.my
                         <p class="card-text"><?php echo $movie_2->more_data_film->lingua; ?></p>
                         <p class="card-text"><?php echo $movie_2->more_data_film->attore_principale; ?></p>
                         <p class="card-text"><?php echo DataMore::$genere; ?></p>
-                        <p>L'età del film è: <?php echo $movie_2->getAge($anno_uscita); ?></p>
+                        <p>L'età del film è : <?php echo $movie_2->getAge(); ?> anni</p>
                     </div>
                 </div>
             </div>
