@@ -80,7 +80,7 @@ $movie_2 = new Movie('Il Signore degli Anelli', 'Peter Jackson', 'https://pad.my
 </head>
 
 <body>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-12 d-flex">
                 <div class="card">
@@ -99,8 +99,8 @@ $movie_2 = new Movie('Il Signore degli Anelli', 'Peter Jackson', 'https://pad.my
                         <p>L'età del film è : <?php echo $movie_1->getAge(); ?> anni</p>
                     </div>
                 </div>
-                <div class="card">
 
+                <div class="card">
                     <img class="card-img-top" src="<?php echo $movie_2->immagine; ?>" alt="Card image cap">
                     <div class="card-body">
                         <h3><?php echo $movie_2->nome_film; ?></h3>
@@ -111,7 +111,8 @@ $movie_2 = new Movie('Il Signore degli Anelli', 'Peter Jackson', 'https://pad.my
                         <p class="card-text">
                             <?php foreach ($movie_2->actor->actor as $actor) {
                                 echo "<p class='card-text'>$actor</p>";
-                            } ?>
+                            }
+                            ?>
                         </p>
 
                         <p>L'età del film è : <?php echo $movie_2->getAge(); ?> anni</p>

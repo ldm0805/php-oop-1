@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+.container-fluid {
+    background-color: aqua;
+}
+
 .card {
     width: 20em;
 }
