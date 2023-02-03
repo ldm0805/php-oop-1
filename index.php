@@ -1,18 +1,47 @@
 <?php
-//Definizione di una classe (user)
+//Definizione di una classe (Movie)
 class Movie
 {
     public $nome_film;
     public $regista;
-    public $lingua_originale;
-    public static $paese_origine = 'America';
-    public $data_di_uscita;
+    public $more_data_film;
+
+    function __construct($_nome, $_regista, DataMore $_more_data_film)
+    {
+        $this->nome_film = $_nome;
+        $this->regista = $_regista;
+        //Aggiungo con la classe DataMore
+        $this->more_data_film = $_more_data_film;
+    }
 }
-$movie_1 = new Movie();
-$movie_1->nome_film = 'Harry Potter e la pietra filosofale';
-$movie_1->regista = 'Chris Columbus';
-$movie_1->lingua_originale = 'Inglese';
-// var_dump($movie_1)
+class DataMore
+{
+    public $lingua;
+    public $attore_principale;
+    public static $genere = 'Fantasy';
+
+    function __construct($_lingua, $_attore_principale)
+    {
+        $this->lingua = $_lingua;
+        $this->attore_principale = $_attore_principale;
+    }
+    public function getgenere()
+    {
+        // Recuperare la propietà della classe per utilizzarla all'esterno 
+        return self::$genere;
+    }
+}
+
+// $movie_1->nome_film = 'Harry Potter e la pietra filosofale';
+// $movie_1->regista = 'Chris Columbus';
+// $movie_1->lingua_originale = 'Inglese';
+// var_dump($movie_1);
+
+$movie_1 = new Movie('Harry Potter e la pietra filosofale', 'Chris Columbus', new DataMore('Inglese', 'Daniel Radcliffe'));
+$movie_2 = new Movie('Il Signore degli Anelli', 'Peter Jackson', new DataMore('Inglese', 'Elijah Wood'));
+// echo '<pre>';
+// var_dump($movie_1);
+// echo '</pre>';
 
 
 ?>
@@ -38,9 +67,21 @@ $movie_1->lingua_originale = 'Inglese';
             <div class="col-12">
                 <h1>
                     <?php
-                    echo "Nome del film: " . $movie_1->nome_film;
-                    echo "<br> Regista: " . $movie_1->regista;
-                    echo "<br> Lingua Originale: " . $movie_1->lingua_originale;
+                    echo $movie_1->nome_film;
+                    echo $movie_1->regista;
+                    echo $movie_1->more_data_film->lingua;
+                    echo $movie_1->more_data_film->attore_principale;
+                    echo DataMore::$genere;
+                    ?>
+                </h1>
+
+                <h1>
+                    <?php
+                    echo $movie_2->nome_film;
+                    echo $movie_2->regista;
+                    echo $movie_2->more_data_film->lingua;
+                    echo $movie_2->more_data_film->attore_principale;
+                    echo DataMore::$genere;
                     ?>
                 </h1>
             </div>
