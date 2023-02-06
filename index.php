@@ -49,7 +49,9 @@ include __DIR__ . './database.php';
                                 Attori secondari:
                                 <!-- ForEach per ciclare la gli attori secondari -->
                                 <?php foreach ($movie->actor->actor as $actor) {
-                                    echo "<p class='card-text'>$actor.</p>";
+                                    echo "<p class='card-text'>
+                                            <span>$actor.</span>
+                                          </p>";
                                 } ?>
                             </div>
                             <p class="card-text">Il film è stato prodotto :

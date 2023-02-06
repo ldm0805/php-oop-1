@@ -36,4 +36,5 @@ p::before {
 
 span {
     text-transform: uppercase;
+    color: rgb(140, 13, 13);
 }
