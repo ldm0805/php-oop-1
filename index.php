@@ -79,22 +79,43 @@ $arrayMovie = [$movie_1, $movie_2];
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 d-flex">
+            <div class="card-cont">
                 <?php foreach ($arrayMovie as $movie) { ?>
                     <div class="card">
                         <img class="card-img-top" src="<?php echo $movie->immagine; ?>" alt="Card image cap">
                         <div class="card-body">
                             <h3><?php echo $movie->nome_film; ?></h3>
-                            <p class="card-text"><?php echo $movie->regista; ?></p>
-                            <p class="card-text"><?php echo $movie->more_data_film->lingua; ?></p>
-                            <p class="card-text"><?php echo $movie->more_data_film->attore_principale; ?></p>
-                            <p class="card-text"><?php echo DataMore::$genere; ?></p>
-                            <p class="card-text">
-                                <?php foreach ($movie->actor->actor as $actor) {
-                                    echo "<p class='card-text'>$actor</p>";
-                                } ?>
+                            <p class="card-text">Regista:
+                                <span>
+                                    <?php echo $movie->regista; ?>.
+                                </span>
                             </p>
-                            <p>L'età del film è : <?php echo $movie->getAge(); ?> anni</p>
+                            <p class="card-text ">Lingua:
+                                <span>
+                                    <?php echo $movie->more_data_film->lingua; ?>.
+                                </span>
+                            </p>
+                            <p class="card-text">Attore Protagonista:
+                                <span>
+                                    <?php echo $movie->more_data_film->attore_principale; ?>.
+                                </span>
+                            </p>
+                            <p class="card-text">Genere:
+                                <span>
+                                    <?php echo DataMore::$genere; ?>.
+                                </span>
+                            </p>
+                            <div class="card-text">
+                                Attori secondari:
+                                <?php foreach ($movie->actor->actor as $actor) {
+                                    echo "<p class='card-text'>$actor.</p>";
+                                } ?>
+                            </div>
+                            <p class="card-text">Il film è stato prodotto :
+                                <span>
+                                    <?php echo $movie->getAge(); ?> anni fa.
+                                </span>
+                            </p>
                         </div>
                     </div>
                 <?php } ?>
