@@ -1,64 +1,5 @@
 <?php
-//Definizione di una classe (Movie)
-class Movie
-{
-    public $nome_film;
-    public $regista;
-    public $immagine;
-    public $more_data_film;
-    public $anno_uscita;
-    public $actor;
-
-    function __construct($_nome, $_regista, $_immagine, $_anno_uscita, DataMore $_more_data_film, MoreActor $_actor)
-    {
-        $this->nome_film = $_nome;
-        $this->regista = $_regista;
-        $this->immagine = $_immagine;
-        $this->anno_uscita = $_anno_uscita;
-        $this->actor = $_actor;
-        //Aggiungo con la classe DataMore
-        $this->more_data_film = $_more_data_film;
-    }
-
-    public function getAge()
-    {
-        $currentYear = date("Y");
-        $age = $currentYear - $this->anno_uscita;
-        return $age;
-    }
-}
-
-class DataMore
-{
-    public $lingua;
-    public $attore_principale;
-    public static $genere = 'Fantasy';
-
-    function __construct($_lingua, $_attore_principale)
-    {
-        $this->lingua = $_lingua;
-        $this->attore_principale = $_attore_principale;
-    }
-}
-
-class MoreActor
-{
-    public $actor;
-    function __construct($_actor)
-    {
-        $this->actor = $_actor;
-    }
-}
-
-// $movie_1->nome_film = 'Harry Potter e la pietra filosofale';
-// $movie_1->regista = 'Chris Columbus';
-// $movie_1->lingua_originale = 'Inglese';
-// var_dump($movie_1);
-
-$movie_1 = new Movie('Harry Potter e la pietra filosofale', 'Chris Columbus', 'https://m.media-amazon.com/images/I/51D0MC5dZhL._SY445_.jpg', '2001', new DataMore('Inglese', 'Daniel Radcliffe'), new MoreActor(array("Ron Weasley", "Hermione Granger")));
-$movie_2 = new Movie('Il Signore degli Anelli', 'Peter Jackson', 'https://pad.mymovies.it/filmclub/2002/01/011/coverlg_home.jpg', '2002', new DataMore('Inglese', 'Elijah Wood'), new MoreActor(array("Viggo Mortensen", "Sean Astin")));
-
-$arrayMovie = [$movie_1, $movie_2];
+include __DIR__ . './server.php';
 ?>
 
 <!DOCTYPE html>
@@ -80,6 +21,7 @@ $arrayMovie = [$movie_1, $movie_2];
     <div class="container-fluid">
         <div class="row">
             <div class="card-cont">
+                <!-- ForEach per ciclare la classe -->
                 <?php foreach ($arrayMovie as $movie) { ?>
                     <div class="card">
                         <img class="card-img-top" src="<?php echo $movie->immagine; ?>" alt="Card image cap">
@@ -107,12 +49,14 @@ $arrayMovie = [$movie_1, $movie_2];
                             </p>
                             <div class="card-text">
                                 Attori secondari:
+                                <!-- ForEach per ciclare la gli attori secondari -->
                                 <?php foreach ($movie->actor->actor as $actor) {
                                     echo "<p class='card-text'>$actor.</p>";
                                 } ?>
                             </div>
                             <p class="card-text">Il film è stato prodotto :
                                 <span>
+                                    <!-- ForEach per calcolare gli anni dall'uscita del film -->
                                     <?php echo $movie->getAge(); ?> anni fa.
                                 </span>
                             </p>
